@@ -89,6 +89,8 @@ class AID:
             return
 
         orientation = self.app._jdaviz_helper.plugins.get('Orientation', None)
+        if orientation is None:
+            raise RuntimeError("Orientation plugin is not available in this application.")
 
         if isinstance(rotation, (u.Quantity, Angle)):
             rotation = rotation.to_value(u.deg)
@@ -102,17 +104,17 @@ class AID:
 
         label = f'{rotation:.2f} deg east of north'
 
-        if label == orientation._obj.orientation.selected:
+        if label == orientation.orientation.selected:
             return
-        elif label in orientation._obj.orientation.choices:
-            orientation._obj.orientation.selected = label
+        elif label in orientation.orientation.choices:
+            orientation.orientation.selected = label
         else:
-            orientation._obj.orientation.selected = "Default orientation"
             orientation.add_orientation(
                 east_left=True,
                 set_on_create=True,
                 label=label,
-                rotation_angle=rotation_angle
+                rotation_angle=rotation_angle,
+                wrt_data=orientation.orientation._get_selected_obj('Default orientation')
             )
 
     def set_viewport(self, center=None, fov=None, rotation=None, image_label=None, **kwargs):

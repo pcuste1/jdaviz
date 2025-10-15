@@ -2275,14 +2275,12 @@ class LayerSelect(SelectPluginComponent):
     def only_wcs_layers(self):
         return 'is_wcs_only' in [getattr(filt, '__name__', '') for filt in self.filters]
 
-    @cached_property
-    def selected_obj(self):
+    def _get_selected_obj(self, selected):
         viewer_names = self.viewer
         if not isinstance(viewer_names, list):
             # case for single-select on the viewer select
             viewer_names = [viewer_names]
 
-        selected = self.selected
         if not isinstance(selected, list):
             selected = [selected]
 
@@ -2296,6 +2294,10 @@ class LayerSelect(SelectPluginComponent):
             return layers[0]
         else:
             return layers
+
+    @cached_property
+    def selected_obj(self):
+        return self._get_selected_obj(self.selected)
 
 
 class LayerSelectMixin(VuetifyTemplate, HubListener):
