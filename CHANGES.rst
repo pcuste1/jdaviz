@@ -11,6 +11,8 @@ New Features
 - Plugin-specific viewer tools (footprint, catalogs, line lists, line analysis) now have a
   toggle button in the plugin UI to enable/disable a custom toolbar specific to that context. [#3812]
 
+- AIDA methods setting and retrieving rotation of imviz viewer [#3834]
+
 Cubeviz
 ^^^^^^^
 
