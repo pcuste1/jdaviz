@@ -67,6 +67,8 @@ New Features
   viewer, and use unit converison functionality when there is moment map data in
   an Image or 3D Spectrum viewer. [#4085]
 
+- Added projection to return of AIDA get_viewport method. [#4076]
+
 Cubeviz
 ^^^^^^^
 - Added ability to load DQ extension in the cubeviz loader, which activates the
